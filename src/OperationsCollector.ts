@@ -1,4 +1,4 @@
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 import { INodeProperties } from 'n8n-workflow';
 import { OpenAPIV3 } from 'openapi-types';
 import pino from 'pino';
@@ -96,8 +96,25 @@ export class BaseOperationsCollector implements OpenAPIVisitor {
      */
     parseFields(operation: OpenAPIV3.OperationObject, context: OperationContext) {
         const fields = [];
-        // Merge path parameters with operation parameters
-        const allParameters = [...(context.path.parameters || []), ...(operation.parameters || [])];
+        // Merge path parameters with operation parameters, avoiding duplicates
+        const pathParams = context.path.parameters || [];
+        const operationParams = operation.parameters || [];
+        const allParameters = [...pathParams];
+
+        // Only add operation parameters that don't already exist in path parameters
+        for (const opParam of operationParams) {
+            // Skip reference objects for now
+            if ('$ref' in opParam) continue;
+
+            const exists = pathParams.some((pathParam) => {
+                if ('$ref' in pathParam) return false;
+                return pathParam.name === opParam.name && pathParam.in === opParam.in;
+            });
+            if (!exists) {
+                allParameters.push(opParam);
+            }
+        }
+
         const parameterFields = this.n8nNodeProperties.fromParameters(allParameters);
         fields.push(...parameterFields);
 
