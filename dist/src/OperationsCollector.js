@@ -18,6 +18,7 @@ class BaseOperationsCollector {
         this.n8nNodeProperties = new SchemaToINodeProperties_1.N8NINodeProperties(doc);
     }
     get operations() {
+        var _a;
         if (this.optionsByResource.size === 0) {
             throw new Error('No operations found in OpenAPI document');
         }
@@ -34,7 +35,7 @@ class BaseOperationsCollector {
                     },
                 },
                 options: options,
-                default: '',
+                default: ((_a = options[0]) === null || _a === void 0 ? void 0 : _a.value) || '',
             };
             operations.push(operation);
         }
