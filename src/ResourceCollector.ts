@@ -36,7 +36,7 @@ export class ResourceCollector implements OpenAPIVisitor {
             type: 'options',
             noDataExpression: true,
             options: options,
-            default: '',
+            default: '={{options[0]?.value || ""}}',
         };
     }
 
