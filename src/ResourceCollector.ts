@@ -1,7 +1,7 @@
-import {OpenAPIVisitor, OperationContext} from "./openapi/OpenAPIVisitor";
-import {OpenAPIV3} from "openapi-types";
-import {INodeProperties} from "n8n-workflow";
-import {IResourceParser} from "./ResourceParser";
+import { INodeProperties } from 'n8n-workflow';
+import { OpenAPIV3 } from 'openapi-types';
+import { OpenAPIVisitor, OperationContext } from './openapi/OpenAPIVisitor';
+import { IResourceParser } from './ResourceParser';
 
 interface TagObject {
     name: string;
@@ -17,12 +17,12 @@ export class ResourceCollector implements OpenAPIVisitor {
     private tagsOrder = new Map<string, number>();
 
     constructor(protected resourceParser: IResourceParser) {
-        this.tags = new Map<string, TagObject>()
+        this.tags = new Map<string, TagObject>();
     }
 
     get resources(): INodeProperties {
-        const tags = this.sortedTags
-        const parser = this.resourceParser
+        const tags = this.sortedTags;
+        const parser = this.resourceParser;
         const options = tags.map((tag) => {
             return {
                 name: parser.name(tag),
@@ -33,31 +33,32 @@ export class ResourceCollector implements OpenAPIVisitor {
         return {
             displayName: 'Resource',
             name: 'resource',
-            type: 'options',
+            type: 'string',
+            noDataExpression: false,
             options: options,
             default: options[0]?.value || '',
         };
     }
 
     private get sortedTags() {
-        const tags = Array.from(this.tags.values())
+        const tags = Array.from(this.tags.values());
         tags.sort((a, b) => {
-            return this.tagsOrder.get(a.name,)! - this.tagsOrder.get(b.name)!;
-        })
+            return this.tagsOrder.get(a.name)! - this.tagsOrder.get(b.name)!;
+        });
         // put "default" at the end if not present explicitly in 'tags"
         if (!this.tagsOrder.has('default')) {
-            const defaultTag = tags.find((tag) => tag.name === 'default')
+            const defaultTag = tags.find((tag) => tag.name === 'default');
             if (defaultTag) {
-                tags.splice(tags.indexOf(defaultTag), 1)
-                tags.push(defaultTag)
+                tags.splice(tags.indexOf(defaultTag), 1);
+                tags.push(defaultTag);
             }
         }
         return tags;
     }
 
     visitOperation(operation: OpenAPIV3.OperationObject, context: OperationContext) {
-        let tags = operation.tags as string[]
-        tags.forEach((tag) => this.addTagByName(tag))
+        let tags = operation.tags as string[];
+        tags.forEach((tag) => this.addTagByName(tag));
     }
 
     private addTagByName(tag: string) {
