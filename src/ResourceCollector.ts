@@ -33,7 +33,7 @@ export class ResourceCollector implements OpenAPIVisitor {
         return {
             displayName: 'Resource',
             name: 'resource',
-            type: 'string',
+            type: 'options',
             noDataExpression: false,
             options: options,
             default: options[0]?.value || '',

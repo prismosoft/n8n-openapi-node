@@ -37,7 +37,7 @@ export class BaseOperationsCollector implements OpenAPIVisitor {
             const operation: INodeProperties = {
                 displayName: 'Operation',
                 name: 'operation',
-                type: 'string',
+                type: 'options',
                 noDataExpression: false,
                 displayOptions: {
                     show: {
