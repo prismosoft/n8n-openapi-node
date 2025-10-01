@@ -45,7 +45,7 @@ export class BaseOperationsCollector implements OpenAPIVisitor {
                     },
                 },
                 options: options,
-                default: '={{options[0]?.value || ""}}',
+                default: `={{${options[0]?.value || ""}}}`,
 
             };
             operations.push(operation);
