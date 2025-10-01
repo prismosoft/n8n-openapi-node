@@ -38,7 +38,7 @@ export class BaseOperationsCollector implements OpenAPIVisitor {
                 displayName: 'Operation',
                 name: 'operation',
                 type: 'options',
-                noDataExpression: false,
+                noDataExpression: true,
                 displayOptions: {
                     show: {
                         resource: [resource],
