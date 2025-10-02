@@ -81,7 +81,7 @@ export class BaseOperationsCollector implements OpenAPIVisitor {
             return;
         }
         const { option, fields: operationFields } = this.parseOperation(operation, context);
-        const resources = operation.tags!!.map((tag: string) => this.resourceParser.value({ name: tag }));
+        const resources = operation.tags!.map((tag: string) => this.resourceParser.value({ name: tag }));
         for (const resourceName of resources) {
             const fields = lodash.cloneDeep(operationFields);
             const operationName = option.name;

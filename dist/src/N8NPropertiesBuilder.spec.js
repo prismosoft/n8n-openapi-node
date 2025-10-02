@@ -130,7 +130,7 @@ test('query param - schema', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -392,7 +392,7 @@ test('query param - dot in field name', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -500,7 +500,7 @@ test('path param', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -617,7 +617,7 @@ test('request body', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -760,7 +760,7 @@ test('enum schema', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -1005,7 +1005,7 @@ test('test overrides', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {

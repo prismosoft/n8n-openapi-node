@@ -21,10 +21,10 @@ class SchemaExampleBuilder {
             }
         }
         if ('oneOf' in schema) {
-            return this.build(schema.oneOf!![0]);
+            return this.build(schema.oneOf![0]);
         }
         if ('allOf' in schema) {
-            const examples = schema.allOf!!.map((s) => this.build(s));
+            const examples = schema.allOf!.map((s) => this.build(s));
             return Object.assign({}, ...examples);
         }
         if (schema.example !== undefined) {

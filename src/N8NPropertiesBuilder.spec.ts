@@ -9,7 +9,7 @@ import {DefaultResourceParser} from "./ResourceParser";
 
 export class CustomOperationParser extends DefaultOperationParser {
     name(operation: OpenAPIV3.OperationObject, context: OperationContext): string {
-        let operationId: string = operation.operationId!!.split('_').slice(1).join('_');
+        let operationId: string = operation.operationId!.split('_').slice(1).join('_');
         if (!operationId) {
             operationId = operation.operationId as string
         }
@@ -103,7 +103,7 @@ test('query param - schema', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -371,7 +371,7 @@ test('query param - dot in field name', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -481,7 +481,7 @@ test('path param', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -601,7 +601,7 @@ test('request body', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -748,7 +748,7 @@ test('enum schema', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {
@@ -1001,7 +1001,7 @@ test('test overrides', () => {
                     },
                 },
             ],
-            // eslint-disable-next-line
+             
             default: '',
         },
         {

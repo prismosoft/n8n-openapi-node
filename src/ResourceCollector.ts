@@ -57,7 +57,7 @@ export class ResourceCollector implements OpenAPIVisitor {
     }
 
     visitOperation(operation: OpenAPIV3.OperationObject, context: OperationContext) {
-        let tags = operation.tags as string[];
+        const tags = operation.tags as string[];
         tags.forEach((tag) => this.addTagByName(tag));
     }
 

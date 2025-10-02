@@ -90,7 +90,7 @@ export class N8NINodeProperties {
         parameter = this.refResolver.resolve<OpenAPIV3.ParameterObject>(parameter)
         let fieldSchemaKeys
         if (parameter.schema) {
-            fieldSchemaKeys = this.fromSchema(parameter.schema!!);
+            fieldSchemaKeys = this.fromSchema(parameter.schema!);
         }
         if (!fieldSchemaKeys) {
             const regexp = /application\/json.*/
@@ -173,7 +173,7 @@ export class N8NINodeProperties {
         if (!content) {
             throw new Error(`No '${regexp}' content found`);
         }
-        const requestBodySchema = content.schema!!;
+        const requestBodySchema = content.schema!;
         const schema = this.refResolver.resolve<OpenAPIV3.SchemaObject>(requestBodySchema)
         if (!schema.properties && schema.type != 'object' && schema.type != 'array') {
             throw new Error(`Request body schema type '${schema.type}' not supported`);
